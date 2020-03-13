@@ -10,18 +10,18 @@ private:
 protected:
     creature(int lvl, int hp, int mp, int str, int dex) : lvl(lvl), hp(hp), mp(mp), str(str), dex(dex) {}
      void status() {
-        std::cout << "level: " << this->lvl << std::endl;
-        std::cout << "health point: " << this->hp << std::endl;
-        std::cout << "mana point: " << this->mp << std::endl;
+        std::cout << "level: " << lvl << std::endl;
+        std::cout << "health point: " << hp << std::endl;
+        std::cout << "mana point: " << mp << std::endl;
     }
     int attack(){
-        return this->str*0.5;
+        return str*0.5;
     }
     int miss(int dmg){
-        return dmg-(this->dex*0.5);
+        return dmg-(dex*0.5);
     }
     void get_dmg(int dmg){
-        this->hp -= dmg;
+        hp -= dmg;
     }
 };
 class hero : public creature {
@@ -33,21 +33,28 @@ private:
     int str;
     int dex;
 public:
-    hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature(lvl, hp, mp, str, dex), name(name) {}
+    hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature(lvl, hp, mp, str, dex), name(name){
+        this->lvl = lvl;
+        this->hp = hp;
+        this->mp = mp;
+        this->str = str;
+        this->dex = dex;
+    }
     void status() {
-        std::cout << "level: " << this->lvl << std::endl;
-        std::cout << "health point: " << this->hp << std::endl;
-        std::cout << "mana point: " << this->mp << std::endl;
+        std::cout << "named: " << name << std::endl;
+        std::cout << "level: " << lvl << std::endl;
+        std::cout << "health point: " << hp << std::endl;
+        std::cout << "mana point: " << mp << std::endl;
 
     }
     int attack() {
-        return this->str*0.5;
+        return str*0.5;
     }
     int miss(int dmg) {
-        return dmg-(this->dex*0.5);
+        return dmg-(dex*0.5);
     }
     void get_dmg(int dmg) {
-        this->hp -= dmg;
+        hp -= dmg;
     }
     void the_fuck(){
         std::cout << "fuck" << '\n';
