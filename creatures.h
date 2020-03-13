@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-class creture{
+class creature{
 private:
     int lvl;
     int hp;
@@ -8,7 +8,7 @@ private:
     int str;
     int dex;
 protected:
-    creture(int lvl, int hp, int mp, int str, int dex) : lvl(lvl), hp(hp), mp(mp), str(str), dex(dex) {}
+    creature(int lvl, int hp, int mp, int str, int dex) : lvl(lvl), hp(hp), mp(mp), str(str), dex(dex) {}
      void status() {
         std::cout << "level: " << this->lvl << std::endl;
         std::cout << "health point: " << this->hp << std::endl;
@@ -24,7 +24,7 @@ protected:
         this->hp -= dmg;
     }
 };
-class hero : public creture {
+class hero : public creature {
 private:
     std::string name;
     int lvl;
@@ -33,7 +33,7 @@ private:
     int str;
     int dex;
 public:
-    hero(int lvl, int hp, int mp, int str, int dex, std::string name):creture(lvl, hp, mp, str, dex), name(name) {}
+    hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature(lvl, hp, mp, str, dex), name(name) {}
     void status() {
         std::cout << "level: " << this->lvl << std::endl;
         std::cout << "health point: " << this->hp << std::endl;
