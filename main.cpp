@@ -47,8 +47,8 @@ int main(){
     hero hr(1, arrn[0], arrn[1], arrn[2], arrn[3], cn); // creture(lvl, hp, mp, str, dex), name(name) 
     hr.status();
     while(1){
-        enemy e(hr.lvl, hr.hp, hr.mp, hr.str, hr.dex);
-        while(e.hp > 0 || hr.hp > 0){
+        enemy e(hr.getlvl(), hr.gethp(), hr.getmp(), hr.getstrg(), hr.getdex());
+        while(e.gethp() > 0 || hr.gethp() > 0){
             if(hero_turn) {
                 e.get_dmg(hr.attack());
                 hero_turn = false;
