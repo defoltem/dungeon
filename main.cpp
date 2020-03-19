@@ -57,6 +57,7 @@ int main(){
                 hr.get_dmg(e.attack());
                 hero_turn = true;
             }
+            system("clear");
             all_status(hr, e);
         }
         break;
