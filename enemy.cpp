@@ -31,16 +31,27 @@ void enemy::get_dmg(int dmg) {
 int enemy::gethp(){
     return hp;
 }
-/*int enemy::getlvl(){
-    return lvl;
-}int creature::getmp(){
-    return mp;
+void enemy::getinv(){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr) return;
+        inventory.at(i)->info();
+    }
 }
-int creature::getstrg(){
-    return str;
+void enemy::addinv(w wid){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr) {
+            inventory.at(i) = object::createobj(wid);
+            return;
+        }
+    }    
 }
-int creature::getdex(){
-    return dex;
-}*/
+void enemy::addinv(f fid){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr) { 
+            inventory.at(i) = object::createobj(fid);
+            return;
+        }
+    }    
+}
 
 

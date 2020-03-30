@@ -34,4 +34,27 @@ int creature::getstrg(){
 int creature::getdex(){
     return dex;
 }
+void creature::getinv(){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr) return;
+        inventory.at(i)->info();
+    }
+}
+void creature::addinv(w wid){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr){
+            inventory.at(i) = object::createobj(wid);
+            return;
+        }
+    }    
+}
+void creature::addinv(f fid){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr){
+            inventory.at(i) = object::createobj(fid);
+            return;
+        }
+    }    
+}
+
     

@@ -40,14 +40,25 @@ int hero::getstrg(){
 int hero::getdex(){
     return dex;
 }
-
-/*    int hero::attack() {
-        return str*0.5;
+void hero::getinv(){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr) return;
+        inventory.at(i)->info();
     }
-    int hero::block(int dmg) {
-        return dmg-(dex*0.5);
+}
+void hero::addinv(w wid){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr) {
+            inventory.at(i) = object::createobj(wid);
+            return;
+        }
+    }    
+}
+void hero::addinv(f fid){
+    for(size_t i = 0; i < inventory.size(); i++){
+        if(inventory.at(i) == nullptr){
+            inventory.at(i) = object::createobj(fid);
+            return;
+        }    
     }
-    int hero::get_dmg(int dmg) {
-        return hp -= dmg;
-    }
-*/
+}
