@@ -14,7 +14,7 @@ public:
     static std::shared_ptr<object> createobj(f fid);
     int getw();
     int getsp();
-    void info();
+    virtual void info();
 };
 
 class weapon : public object{
@@ -27,7 +27,7 @@ public:
     int getd();
     int getw();
     int getsp();
-    void info();    
+    void info()override;    
 };
 
 class food : public object{
@@ -40,5 +40,5 @@ public:
     int geth();
     int getw();
     int getsp();
-    void info();
+    void info()override;
 };

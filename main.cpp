@@ -22,7 +22,7 @@ int main(){
     std::string n;
     std::cout << "write your name: ";
     getline(std::cin, n);
-    const std::string cn = n; // creat hero's name
+    const std::string cn = n; // create hero's name
     std::cout << cn << '\n';
     std::cout << "each your characteristic is equal to 5 and you have only 3 points\nif you don't want to add points then just write zero\n";
     while(points > 0){
