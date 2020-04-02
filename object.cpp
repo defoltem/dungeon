@@ -17,18 +17,15 @@ std::shared_ptr<object> object::createobj(w wid){
     switch (wid)
     {
     case sword:{
-        std::shared_ptr<weapon> pw(new weapon(2, 5, 2, "sword"));
-        p = pw;
+        p = std::make_shared<weapon>(weapon(2, 5, 2, "sword"));
         break;
     }
     case axe:{
-        std::shared_ptr<weapon> pw(new weapon(3, 7, 4, "axe"));
-        p = pw;
+        p = std::make_shared<weapon>(weapon(3, 7, 4, "axe"));
         break;
     }
     case morgenstern:{
-        std::shared_ptr<weapon> pw(new weapon(5, 10, 5, "morgenstern"));
-        p = pw;
+        p = std::make_shared<weapon>(weapon(5, 10, 5, "morgenstern"));
         break;
     }
     default:
@@ -42,17 +39,16 @@ std::shared_ptr<object> object::createobj(f fid){
     switch (fid)
     {
     case bread:{
-        std::shared_ptr<food> pw(new food(2, 2, 3, "bread"));
-        p = pw;
+        p = std::make_shared<food>(food(2, 2, 3, "bread"));
         break;
     }
     case meat:{
-        std::shared_ptr<food> pw(new food(3, 5, 4, "meat"));
-        p = pw;
+        p = std::make_shared<food>(food(3, 5, 4, "meat"));
         break;
     }
     case nuts:{
-        std::shared_ptr<food> pw(new food(1, 1, 1, "nuts"));
+        p = std::make_shared<food>(food(1, 1, 1, "nuts"));
+        break;
     }
     default:
         break;

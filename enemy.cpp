@@ -11,6 +11,9 @@ enemy::enemy(int lvl, int hp, int mp, int str, int dex) : creature(lvl, hp, mp, 
     else if (lvl <= 10) name = "golem";
     else name = "slave of eternity";
 }
+enemy::~enemy(){
+    std::cout << "enemy fell\n";
+}
 void enemy::status() {
     std::cout << "named: " << name << std::endl;
     std::cout << "level: " << lvl << std::endl;

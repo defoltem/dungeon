@@ -6,10 +6,10 @@
 void line(){
     std::cout << "----------------\n";
 }
-void all_status(hero h, enemy e){
+void all_status(hero h, std::shared_ptr<enemy> e){
     h.status();
     line();
-    e.status();    
+    e->status();    
 }
 
 int main(){
@@ -48,16 +48,15 @@ int main(){
     hr.status();
     hr.addinv(sword);
     hr.getinv();
-    /*
     while(1){
-        enemy e(hr.getlvl(), hr.gethp(), hr.getmp(), hr.getstrg(), hr.getdex());
-        while(e.gethp() > 0 || hr.gethp() > 0){
+        std::shared_ptr<enemy> e(new enemy(hr.getlvl(), hr.gethp(), hr.getmp(), 0, hr.getdex()));
+        while(e->gethp() > 0 || hr.gethp() > 0){
             if(hero_turn) {
-                e.get_dmg(hr.attack());
+                e->get_dmg(hr.attack());
                 hero_turn = false;
                 }
             else {
-                hr.get_dmg(e.attack());
+                hr.get_dmg(e->attack());
                 hero_turn = true;
             }
             system("clear");
@@ -65,13 +64,5 @@ int main(){
         }
         break;
     }
-    /*std::cout<< hr.attack() <<'\n';
-    enemy e(hr.lvl, hr.hp, hr.mp, hr.str, hr.dex);
-    e.status();
-    std::cout << "-------------\n";
-    hr.status();
-    std::cout << "goblin`s attack: " << e.attack() << '\n';
-    e.get_dmg(8); 
-    e.status();*/
     return 0;
 }

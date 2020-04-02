@@ -48,6 +48,7 @@ private:
     std::string name;
 public:
     enemy(int lvl, int hp, int mp, int str, int dex);
+    ~enemy();
     void status();
     int attack();
     int block(int dmg);
