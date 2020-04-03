@@ -1,5 +1,5 @@
 #include <iostream>
-#include "creatures.h"
+#include "cret/creatures.h"
 #include <string>
 #include <ncurses.h>
 
@@ -46,7 +46,8 @@ int main(){
     }
     hero hr(1, arrn[0], arrn[1], arrn[2], arrn[3], cn); // creture(lvl, hp, mp, str, dex), name(name) 
     hr.status();
-    hr.addinv(sword);
+    hr.addinv(morgenstern);
+    hr.setdmg();
     hr.getinv();
     while(1){
         std::shared_ptr<enemy> e(new enemy(hr.getlvl(), hr.gethp(), hr.getmp(), 0, hr.getdex()));
@@ -61,6 +62,7 @@ int main(){
             }
             system("clear");
             all_status(hr, e);
+            break;
         }
         break;
     }

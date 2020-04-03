@@ -10,6 +10,12 @@ int object::getw(){
 int object::getsp(){
     return self_price;
 }
+int object::getd(){
+    return 1;
+}
+int object::geth(){
+    return 1;
+}
 object::object(int weight, int self_price) : weight(weight), self_price(self_price) {}
 //enum w {sword = 0, axe, morgenstern};
 std::shared_ptr<object> object::createobj(w wid){

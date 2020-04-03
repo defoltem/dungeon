@@ -12,8 +12,10 @@ public:
     object(int weight, int self_price);
     static std::shared_ptr<object> createobj(w wid);
     static std::shared_ptr<object> createobj(f fid);
-    int getw();
-    int getsp();
+    virtual int getw();
+    virtual int getsp();
+    virtual int getd();
+    virtual int geth();
     virtual void info();
 };
 
@@ -24,9 +26,9 @@ private:
 public:
     weapon(int weight, int self_price, int damage, std::string obj_name);
     //static std::shared_ptr<weapon> createweap(w i);
-    int getd();
-    int getw();
-    int getsp();
+    int getd()override;
+    int getw()override;
+    int getsp()override;
     void info()override;    
 };
 
@@ -37,8 +39,8 @@ private:
 public:
     food(int weight, int self_price, int heal, std::string obj_name);
     //static std::shared_ptr<food> createf(f id);
-    int geth();
-    int getw();
-    int getsp();
+    int geth()override;
+    int getw()override;
+    int getsp()override;
     void info()override;
 };

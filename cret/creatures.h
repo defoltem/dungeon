@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include "wNs.h"
+#include "inventory/wNs.h"
 class creature{
 protected:
     int lvl;
@@ -9,6 +9,8 @@ protected:
     int mp;
     int str;
     int dex;
+    int dmg = 1;
+    int main_weapon;
     std::array<std::shared_ptr<object>, 10> inventory;
     creature(int lvl, int hp, int mp, int str, int dex);
     void status();
@@ -21,6 +23,8 @@ protected:
     int getstrg();
     int getdex();
     void getinv();
+    void setheal();
+    void setdmg();
     void addinv(w wid);
     void addinv(f fid);
 };
@@ -40,6 +44,8 @@ public:
     int getstrg();
     int getdex();
     void getinv();
+    void setheal();
+    void setdmg();
     void addinv(w wid);
     void addinv(f fid);    
 };

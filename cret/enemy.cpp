@@ -1,52 +1,47 @@
-#include "creatures.h"
-#include <string>
 #include <iostream>
-hero::hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature(lvl, hp, mp, str, dex), name(name){
+#include <string>
+#include "creatures.h"
+enemy::enemy(int lvl, int hp, int mp, int str, int dex) : creature(lvl, hp, mp, str, dex){
     this->lvl = lvl;
     this->hp = hp;
     this->mp = mp;
     this->str = str;
     this->dex = dex;
+    if (lvl <= 5) name = "goblin";
+    else if (lvl <= 10) name = "golem";
+    else name = "slave of eternity";
 }
-void hero::status() {
+enemy::~enemy(){
+    std::cout << "enemy fell\n";
+}
+void enemy::status() {
     std::cout << "named: " << name << std::endl;
     std::cout << "level: " << lvl << std::endl;
     std::cout << "health point: " << hp << std::endl;
     std::cout << "mana point: " << mp << std::endl;
+    std::cout<< "damage: " << dmg << std::endl;    
     std::cout << "strength: " << str << std::endl;
     std::cout << "dexterity: " << dex << std::endl;                
 }
-int hero::attack() {
-    return str*0.5;
+int enemy::attack() {
+    return dmg*str*0.5;
 }
-int hero::block(int dmg) {
+int enemy::block(int dmg) {
     return dmg-(dex*0.5);
 }
-void hero::get_dmg(int dmg) {
+void enemy::get_dmg(int dmg) {
     hp -= dmg;
 }
-int hero::getlvl(){
-    return lvl;
-}
-int hero::gethp(){
+int enemy::gethp(){
     return hp;
 }
-int hero::getmp(){
-    return mp;
-}
-int hero::getstrg(){
-    return str;
-}
-int hero::getdex(){
-    return dex;
-}
-void hero::getinv(){
+void enemy::getinv(){
     for(size_t i = 0; i < inventory.size(); i++){
         if(inventory.at(i) == nullptr) return;
         inventory.at(i)->info();
     }
 }
-void hero::addinv(w wid){
+void enemy::addinv(w wid){
     for(size_t i = 0; i < inventory.size(); i++){
         if(inventory.at(i) == nullptr) {
             inventory.at(i) = object::createobj(wid);
@@ -54,11 +49,13 @@ void hero::addinv(w wid){
         }
     }    
 }
-void hero::addinv(f fid){
+void enemy::addinv(f fid){
     for(size_t i = 0; i < inventory.size(); i++){
-        if(inventory.at(i) == nullptr){
+        if(inventory.at(i) == nullptr) { 
             inventory.at(i) = object::createobj(fid);
             return;
-        }    
-    }
+        }
+    }    
 }
+
+
