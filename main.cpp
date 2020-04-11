@@ -2,6 +2,29 @@
 #include "cret/creatures.h"
 #include <string>
 #include <ncurses.h>
+#include <array>
+
+void prints(std::string s){
+    for(const char c:s) addch(c | A_STANDOUT);
+    addch('\n');
+}
+
+void choose(const std::array<std::string, 4> arr){
+    unsigned choice = 0;
+    curs_set(0);
+    while (1)
+    {
+        for(size_t i = 0; i < arr.size(); i++){
+            if (i == choice) prints(arr.at(i));
+            else printw("%s\n", arr.at(i).c_str());
+        }
+        getch();
+    }
+}
+
+void fight(){
+
+}
 
 void line(){
     std::cout << "----------------\n";
@@ -44,11 +67,19 @@ int main(){
         step++;
         line();
     }
+    system("clear");
+    keypad(stdscr, true); // allow arrows
+    const std::array<std::string, 4> bar = {"fight", "status", "inventory", "choose weapon"};
+    initscr();
     hero hr(1, arrn[0], arrn[1], arrn[2], arrn[3], cn); // creture(lvl, hp, mp, str, dex), name(name) 
-    hr.status();
-    hr.addinv(morgenstern);
+    //hr.status();
+    choose(bar);
+    /*hr.addinv(morgenstern);
     hr.setdmg();
-    hr.getinv();
+    hr.getinv();*/
+    getch();
+    endwin();
+    return 0;
     while(1){
         std::shared_ptr<enemy> e(new enemy(hr.getlvl(), hr.gethp(), hr.getmp(), 0, hr.getdex()));
         while(e->gethp() > 0 || hr.gethp() > 0){

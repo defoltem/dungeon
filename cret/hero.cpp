@@ -1,6 +1,7 @@
 #include "creatures.h"
 #include <string>
 #include <iostream>
+#include <ncurses.h>
 hero::hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature(lvl, hp, mp, str, dex), name(name){
     this->lvl = lvl;
     this->hp = hp;
@@ -9,13 +10,24 @@ hero::hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature
     this->dex = dex;
 }
 void hero::status() {
-    std::cout << "named: " << name << std::endl;
+    /*std::cout << "named: " << name << std::endl;
     std::cout << "level: " << lvl << std::endl;
     std::cout << "health point: " << hp << std::endl;
     std::cout << "mana point: " << mp << std::endl;
     std::cout<< "damage: " << dmg << std::endl;
     std::cout << "strength: " << str << std::endl;
     std::cout << "dexterity: " << dex << std::endl;                
+    */
+ //   initscr();
+    printw("named: %s\n", name.c_str());
+    printw("level: %d\n", lvl);
+    printw("health point: %d\n", hp);
+    printw("mana point: %d\n", mp);
+    printw("damage: %d\n", dmg);
+    printw("strength: %d\n", str);
+    printw("dexterity: %d\n", dex);
+    getch();
+   // endwin();
 }
 int hero::attack() {
     return dmg*str*0.5;
