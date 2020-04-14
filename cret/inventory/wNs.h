@@ -1,6 +1,6 @@
 #include <string>
 #include <memory>
-//enum obj {weap = 0, food};
+#include <ncurses.h>
 enum w {sword = 0, axe, morgenstern};
 enum f {bread = 0, meat, nuts};
 

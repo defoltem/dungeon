@@ -1,8 +1,8 @@
 #include "wNs.h"
 #include <iostream>
 void object::info(){
-    std::cout << "weight: " << weight << '\n';
-    std::cout << "self price: " << self_price << '\n';
+    printw("weight: %d\n", weight);
+    printw("self price: %d\n", self_price);
 }
 int object::getw(){
     return weight;

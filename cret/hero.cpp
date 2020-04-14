@@ -1,7 +1,6 @@
 #include "creatures.h"
 #include <string>
 #include <iostream>
-#include <ncurses.h>
 hero::hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature(lvl, hp, mp, str, dex), name(name){
     this->lvl = lvl;
     this->hp = hp;
@@ -10,15 +9,7 @@ hero::hero(int lvl, int hp, int mp, int str, int dex, std::string name):creature
     this->dex = dex;
 }
 void hero::status() {
-    /*std::cout << "named: " << name << std::endl;
-    std::cout << "level: " << lvl << std::endl;
-    std::cout << "health point: " << hp << std::endl;
-    std::cout << "mana point: " << mp << std::endl;
-    std::cout<< "damage: " << dmg << std::endl;
-    std::cout << "strength: " << str << std::endl;
-    std::cout << "dexterity: " << dex << std::endl;                
-    */
- //   initscr();
+    clear();
     printw("named: %s\n", name.c_str());
     printw("level: %d\n", lvl);
     printw("health point: %d\n", hp);
@@ -27,7 +18,6 @@ void hero::status() {
     printw("strength: %d\n", str);
     printw("dexterity: %d\n", dex);
     getch();
-   // endwin();
 }
 int hero::attack() {
     return dmg*str*0.5;
@@ -54,32 +44,40 @@ int hero::getdex(){
     return dex;
 }
 void hero::setdmg(){
+    clear();
     size_t per;
-    std::cout << "choose a weapon: ";
-    std::cin>>per;
+    printw("choose a weapon: ");
+    scanw("%d", &per); // need to add ncurses
     if(per <= inventory.size() && per >= 0 && inventory.at(per) != nullptr) {
         main_weapon = per;
         dmg = inventory.at(main_weapon)->getd();
     }
     else {
-        std::cout << "there's no item like that";
+        printw("there's no item like that");
         return;
     }
+    getch();
 }
 void hero::setheal(){
     size_t per;
-    std::cout << "choose an object: ";
+    printw("choose an object: ");
     std::cin>>per;
     if(per <= inventory.size() && per >= 0 && inventory.at(per) != nullptr){
         hp += inventory.at(per)->geth();
     }
+        else {
+        printw("there's no item like that");
+        return;
+    }
 }
 
 void hero::getinv(){
+    clear();
     for(size_t i = 0; i < inventory.size(); i++){
         if(inventory.at(i) == nullptr) return;
         inventory.at(i)->info();
     }
+    getch();
 }
 void hero::addinv(w wid){
     for(size_t i = 0; i < inventory.size(); i++){

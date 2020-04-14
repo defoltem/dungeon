@@ -9,30 +9,43 @@ void prints(std::string s){
     addch('\n');
 }
 
-void choose(const std::array<std::string, 4> arr){
+void fight(){
+    clear();
+    printw("- you will die!\n- no u");
+    getch();
+}
+
+void choose(const std::array<std::string, 4> arr, hero &h){
     unsigned choice = 0;
     curs_set(0);
     while (1)
     {
+        clear();
+        printw("use vim-keys(j - down, k - up)\n");
         for(size_t i = 0; i < arr.size(); i++){
             if (i == choice) prints(arr.at(i));
             else printw("%s\n", arr.at(i).c_str());
         }
-        getch();
+        printw("%d\n", choice);
+        switch(getch()){
+            case 107:
+                if(choice) choice--;
+            break;
+            case 106:
+                if(choice != 3) choice++;
+            break;
+            case 10:
+                if(!choice) fight(); // this kinda bad
+                else if(choice == 1) h.status();
+                else if (choice == 2) h.getinv();
+                else if (choice == 3)  h.setdmg();
+            break;
+        }
     }
-}
-
-void fight(){
-
 }
 
 void line(){
     std::cout << "----------------\n";
-}
-void all_status(hero h, std::shared_ptr<enemy> e){
-    h.status();
-    line();
-    e->status();    
 }
 
 int main(){
@@ -72,11 +85,8 @@ int main(){
     const std::array<std::string, 4> bar = {"fight", "status", "inventory", "choose weapon"};
     initscr();
     hero hr(1, arrn[0], arrn[1], arrn[2], arrn[3], cn); // creture(lvl, hp, mp, str, dex), name(name) 
-    //hr.status();
-    choose(bar);
-    /*hr.addinv(morgenstern);
-    hr.setdmg();
-    hr.getinv();*/
+    hr.addinv(morgenstern);
+    choose(bar, hr);
     getch();
     endwin();
     return 0;
@@ -92,7 +102,7 @@ int main(){
                 hero_turn = true;
             }
             system("clear");
-            all_status(hr, e);
+            //all_status(hr, e);
             break;
         }
         break;

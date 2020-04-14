@@ -2,6 +2,7 @@
 #include <string>
 #include <array>
 #include "inventory/wNs.h"
+#include <ncurses.h>
 class creature{
 protected:
     int lvl;

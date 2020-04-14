@@ -15,8 +15,8 @@ int food::getw(){
     return weight;
 }
 void food::info(){
-    std::cout << "object: " << obj_name << '\n';
-    std::cout << "weight: " << weight << '\n';
-    std::cout << "self price: " << self_price << '\n';
-    std::cout << "heal: " << heal << '\n';
+    printw("object: %s\n", obj_name.c_str());
+    printw("weight: %d\n", weight);
+    printw("self price: %d\n", self_price);
+    printw("heal: %d\n", heal);
 }
