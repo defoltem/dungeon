@@ -137,9 +137,9 @@ int main(){
     const std::array<std::string, 4> bar = {"fight", "status", "inventory", "choose weapon"};
     initscr();
     hero hr(1, arrn[0], arrn[1], arrn[2], arrn[3], cn); // creture(lvl, hp, mp, str, dex), name(name) 
-    hr.addinv(morgenstern);
-    hr.addinv(axe);
-    hr.addinv(bread);
+    //hr.addinv(morgenstern);
+    //hr.addinv(axe);
+    //hr.addinv(bread);
     choose(bar, hr);
     endwin();
     return 0;
