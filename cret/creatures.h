@@ -6,6 +6,7 @@
 class creature{
 protected:
     int lvl;
+    int lvl_point = 0;
     int hp;
     int mp;
     int str;
@@ -24,6 +25,8 @@ protected:
     int getstrg();
     int getdex();
     void getinv();
+    int getlvlp();
+    void setlvlp();
     void setheal();
     void setdmg();
     void addinv(w wid);
@@ -46,6 +49,8 @@ public:
     int getdex();
     void getinv();
     void setheal();
+    int getlvlp();
+    void setlvlp();
     void setdmg();
     void addinv(w wid);
     void addinv(f fid);    
@@ -55,7 +60,6 @@ private:
     std::string name;
 public:
     enemy(int lvl, int hp, int mp, int str, int dex);
-    ~enemy();
     void status();
     int attack();
     int block(int dmg);

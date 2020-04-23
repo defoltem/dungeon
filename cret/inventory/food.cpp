@@ -20,3 +20,9 @@ void food::info(){
     printw("self price: %d\n", self_price);
     printw("heal: %d\n", heal);
 }
+std::string food::get_label(){
+    return "food";
+}
+std::string food::get_name(){
+    return obj_name;
+}

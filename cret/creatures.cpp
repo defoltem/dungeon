@@ -20,6 +20,15 @@ int creature::block(int dmg) {
 void creature::get_dmg(int dmg) {
      hp -= dmg;
 }
+int creature::getlvlp(){
+    return lvl_point;
+}
+void creature::setlvlp(){
+    lvl_point++;
+    if (lvl_point == 3) lvl++;
+    if (lvl_point == 5) lvl++;
+    if (lvl_point == 10) lvl++;        
+}
 int creature::getlvl(){
     return lvl;
 }

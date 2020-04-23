@@ -17,6 +17,8 @@ public:
     virtual int getd();
     virtual int geth();
     virtual void info();
+    virtual std::string get_label();
+    virtual std::string get_name();
 };
 
 class weapon : public object{
@@ -29,7 +31,9 @@ public:
     int getd()override;
     int getw()override;
     int getsp()override;
-    void info()override;    
+    void info()override;
+    std::string get_label()override;
+    std::string get_name()override;
 };
 
 class food : public object{
@@ -43,4 +47,6 @@ public:
     int getw()override;
     int getsp()override;
     void info()override;
+    std::string get_label()override;
+    std::string get_name()override;
 };

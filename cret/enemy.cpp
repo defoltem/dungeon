@@ -11,17 +11,20 @@ enemy::enemy(int lvl, int hp, int mp, int str, int dex) : creature(lvl, hp, mp, 
     else if (lvl <= 10) name = "golem";
     else name = "slave of eternity";
 }
-enemy::~enemy(){
-    std::cout << "enemy fell\n";
-}
 void enemy::status() {
-    std::cout << "named: " << name << std::endl;
-    std::cout << "level: " << lvl << std::endl;
-    std::cout << "health point: " << hp << std::endl;
-    std::cout << "mana point: " << mp << std::endl;
-    std::cout<< "damage: " << dmg << std::endl;    
-    std::cout << "strength: " << str << std::endl;
-    std::cout << "dexterity: " << dex << std::endl;                
+    int x = getmaxx(stdscr);
+    move(0, x-20);
+    printw("named: %s\n", name.c_str());
+    move(1, x-20);    // too bad
+    printw("level: %d\n", lvl);
+    move(2, x-20);
+    printw("health point: %d\n", hp);
+    move(3, x-20);
+    printw("mana point: %d\n", mp);
+    move(4, x-20);
+    printw("damage: %d\n", dmg);
+//    printw("strength: %d\n", str);
+//    printw("dexterity: %d\n", dex);
 }
 int enemy::attack() {
     return dmg*str*0.5;

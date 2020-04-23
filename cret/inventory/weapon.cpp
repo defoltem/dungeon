@@ -20,3 +20,9 @@ void weapon::info(){
     printw("self price: %d\n", self_price);
     printw("damage: %d\n", damage);
 }
+std::string weapon::get_name(){
+    return obj_name;
+}
+std::string weapon::get_label(){
+    return "weapon";
+}

@@ -4,29 +4,79 @@
 #include <ncurses.h>
 #include <array>
 
+void all_status(hero h, std::shared_ptr<enemy> e){
+    h.status();
+    e->status();
+}
+
 void prints(std::string s){
     for(const char c:s) addch(c | A_STANDOUT);
     addch('\n');
 }
 
-void fight(){
-    clear();
-    printw("- you will die!\n- no u");
-    getch();
+void fight(hero &hr, bool isdead){
+    std::array<std::string, 2> arr = {"hit", "heal"};
+    bool hero_turn = true;
+    unsigned choice = 0;
+    while(1){
+        std::shared_ptr<enemy> e(new enemy(hr.getlvl(), hr.gethp()/2, hr.getmp()/2, hr.getstrg()/2, hr.getdex()/2));
+        while(1){
+            if(hero_turn) {
+                while(1){
+                    clear();
+                    all_status(hr, e);
+                    for(size_t i = 0; i < arr.size(); i++){
+                        if (i == choice) prints(arr.at(i));
+                        else printw("%s\n", arr.at(i).c_str());
+                    }
+                    switch(getch()){
+                            case 107:
+                                if(choice) choice--;
+                            break;
+                            case 106:
+                                if(choice != 1) choice++;
+                            break;
+                            case 10:
+                                if (!choice) e->get_dmg(hr.attack());
+                                else if (choice) hr.setheal();
+                                hero_turn = false;
+                            break;
+                        }
+                        if(!hero_turn) break;
+                    }
+                }
+            if(e->gethp() <= 0) {
+                hr.setlvlp();
+                return;
+            }
+            else {
+                all_status(hr, e);
+                hr.get_dmg(e->attack());
+                hero_turn = true;
+            }
+            if(hr.gethp() <= 0) {
+                printw("you're dead\n");
+                getch();
+                isdead = true;
+                return;
+            }
+            clear();
+        }
+    }
 }
 
 void choose(const std::array<std::string, 4> arr, hero &h){
     unsigned choice = 0;
+    bool isdead = false;
     curs_set(0);
-    while (1)
-    {
+    while (1) {
         clear();
-        printw("use vim-keys(j - down, k - up)\n");
+        if(isdead) return;
+        printw("use vim-keys(j - down, k - up)\npress 'e' for exit\n");
         for(size_t i = 0; i < arr.size(); i++){
             if (i == choice) prints(arr.at(i));
             else printw("%s\n", arr.at(i).c_str());
         }
-        printw("%d\n", choice);
         switch(getch()){
             case 107:
                 if(choice) choice--;
@@ -34,9 +84,12 @@ void choose(const std::array<std::string, 4> arr, hero &h){
             case 106:
                 if(choice != 3) choice++;
             break;
+            case 101:
+                isdead = true;
+            break;
             case 10:
-                if(!choice) fight(); // this kinda bad
-                else if(choice == 1) h.status();
+                if(!choice) fight(h, isdead); // this kinda bad
+                else if(choice == 1) { h.status(); getch(); }
                 else if (choice == 2) h.getinv();
                 else if (choice == 3)  h.setdmg();
             break;
@@ -49,7 +102,6 @@ void line(){
 }
 
 int main(){
-    bool hero_turn = true;
     const int size_arr = 4;
     short int for_cicle = size_arr;
     int arrn[size_arr] = {5, 5, 5, 5};
@@ -86,26 +138,9 @@ int main(){
     initscr();
     hero hr(1, arrn[0], arrn[1], arrn[2], arrn[3], cn); // creture(lvl, hp, mp, str, dex), name(name) 
     hr.addinv(morgenstern);
+    hr.addinv(axe);
+    hr.addinv(bread);
     choose(bar, hr);
-    getch();
     endwin();
-    return 0;
-    while(1){
-        std::shared_ptr<enemy> e(new enemy(hr.getlvl(), hr.gethp(), hr.getmp(), 0, hr.getdex()));
-        while(e->gethp() > 0 || hr.gethp() > 0){
-            if(hero_turn) {
-                e->get_dmg(hr.attack());
-                hero_turn = false;
-                }
-            else {
-                hr.get_dmg(e->attack());
-                hero_turn = true;
-            }
-            system("clear");
-            //all_status(hr, e);
-            break;
-        }
-        break;
-    }
     return 0;
 }
